@@ -106,7 +106,8 @@ def process(args):
 
     logging.info('Total found: %i', len(found))
     logging.info('Total not found: %i', len(not_found))
-
+    if len(not_found) is not 0:
+        sys.exit(1)
     if config['output_location'] is not None:
         if config['output_location'].endswith('.mks'):
             create_mks_file(config['mmg'], config['output_location'], config['script'], found.values())
@@ -114,8 +115,7 @@ def process(args):
             copy_fonts_to_folder(config['output_location'], found.values())
 
     logging.debug('Job done in %fs' % round(time() - start_time, 5))
-
-
+   
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="ASS font collector")
 
