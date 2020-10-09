@@ -29,6 +29,7 @@ class FontLoader(object):
     def get_fonts_for_list(self, font_list):
         found = {}
         not_found = {}
+        paths = []
 
         search_dict = defaultdict(list)
         for font in self.fonts:
@@ -77,8 +78,9 @@ class FontLoader(object):
                     continue
 
             found[font_info] = best_candidate
+            paths.append(os.path.realpath(best_candidate.path))
             logging.debug('Found font %s at %s' % (font_info, best_candidate.path))
-        return found, not_found
+        return found, not_found, paths
 
 
     def __load_fonts(self, fonts_paths):
