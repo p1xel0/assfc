@@ -51,6 +51,7 @@ def process(args):
     found, not_found, paths = collector.get_fonts_for_list(fonts)
 
     if len(not_found) != 0:
+        print(file=sys.stderr, *not_found, sep = "\n")
         sys.exit(1)
     elif len(found) != 0:
         print(*paths, sep = "\n")
